@@ -1,6 +1,5 @@
 %token <int> INT
 %token <float> FLOAT
-%token <string> ID
 %token <string> STRING
 %token TRUE
 %token FALSE
@@ -42,11 +41,13 @@ value:
   ;
 
 (* part 4 *)
-object_fields: obj = rev_object_fields { List.rev obj };
+object_fields: 
+  | (* empty *) { [] }
+  | obj = rev_object_fields { List.rev obj };
 
 rev_object_fields:
-  | (* empty *) { [] }
-  | obj = rev_object_fields; COMMA; k = ID; COLON; v = value
+  | k = STRING; COLON; v = value { [(k, v)] } 
+  | obj = rev_object_fields; COMMA; k = STRING; COLON; v = value
     { (k, v) :: obj }
   ;
 
