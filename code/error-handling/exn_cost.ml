@@ -16,12 +16,9 @@ let end_with_exn () =
   with Exit -> ()
 
 let () =
-  [ Bench.Test.create ~name:"simple computation"
-      (fun () -> simple_computation ());
-    Bench.Test.create ~name:"simple computation w/handler"
-      (fun () -> simple_with_handler ());
-    Bench.Test.create ~name:"end with exn"
-      (fun () -> end_with_exn ());
+  [ Bench.Test.create ~name:"simple computation" simple_computation;
+    Bench.Test.create ~name:"simple computation w/handler" simple_with_handler;
+    Bench.Test.create ~name:"end with exn" end_with_exn;
   ]
   |> Bench.make_command
   |> Command.run
