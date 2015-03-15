@@ -154,7 +154,7 @@ handle_error ();;
 handle_error ();;
 #part 33
 let handle_error () =
-    try_with (fun () -> maybe_raise ())
+  try_with maybe_raise
     >>| function
     | Ok ()   -> "success"
     | Error _ -> "failure"
