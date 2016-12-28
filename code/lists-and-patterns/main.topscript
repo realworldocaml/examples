@@ -32,8 +32,9 @@ let rec drop_value l to_drop =
     match l with
     | [] -> []
     | hd :: tl ->
-      let new_tl = drop_value tl to_drop in
-      if hd = to_drop then new_tl else hd :: new_tl
+      if hd = to_drop
+      then drop_value tl to_drop
+      else hd :: drop_value tl to_drop
   ;;
 drop_value [1;2;3] 2;;
 #part 8
