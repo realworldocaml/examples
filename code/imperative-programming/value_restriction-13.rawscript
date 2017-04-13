@@ -1,5 +1,5 @@
 # module Concat_list : sig
-    type 'a t
+    type +'a t
     val empty : 'a t
     val singleton : 'a -> 'a t
     val concat  : 'a t -> 'a t -> 'a t  (* constant time *)
