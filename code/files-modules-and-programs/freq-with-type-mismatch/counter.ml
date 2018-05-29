@@ -4,15 +4,15 @@ type t = int String.Map.t
 
 let empty = String.Map.empty
 
-let to_list t = Map.to_alist t
+let to_list t = String.Map.to_alist t
 
-let touch t s =
+let touch (t:t) (s:string) : t =
   let count =
     match Map.find t s with
     | None -> 0
     | Some x -> x
   in
-  Map.add t ~key:s ~data:(count + 1)
+  Map.set t ~key:s ~data:(count + 1)
 
 (* part 1 *)
 type median = | Median of string
