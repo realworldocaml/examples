@@ -27,7 +27,7 @@ type service_info =
 |}];;
 let service_info_of_string line =
   let matches = 
-    Re.exec (Re_posix.compile_pat "([a-zA-Z]+)[ \t]+([0-9]+)/([a-zA-Z]+)") line
+    Re.exec (Re.Posix.compile_pat "([a-zA-Z]+)[ \t]+([0-9]+)/([a-zA-Z]+)") line
   in
   { service_name = Re.get matches 1;
     port = Int.of_string (Re.get matches 2);
@@ -58,8 +58,7 @@ let parse_lines parse file_contents =
 parse_lines service_info_of_string
   {|rtmp              1/ddp     # Routing Table Maintenance Protocol
     tcpmux            1/udp     # TCP Port Service Multiplexer
-    tcpmux            1/tcp     # TCP Port Service Multiplexer
-  |}
+    tcpmux            1/tcp     # TCP Port Service Multiplexer |}
 ;;
 [%%expect ocaml {|
 - : service_info with_line_num list =
@@ -158,7 +157,7 @@ let service_info_of_string line =
   in
   (* now, use a regular expression to break up the service definition *)
   let matches = 
-    Re.exec (Re_posix.compile_pat "([a-zA-Z]+)[ \t]+([0-9]+)/([a-zA-Z]+)") line
+    Re.exec (Re.Posix.compile_pat "([a-zA-Z]+)[ \t]+([0-9]+)/([a-zA-Z]+)") line
   in
   let service_name = Re.get matches 1 in
   let port = Int.of_string (Re.get matches 2) in
