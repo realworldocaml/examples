@@ -18,7 +18,6 @@ depends: [
   "yojson"
   "astring"
   "cryptokit"
-  "async_graphics"
   "ocp-index"
   "atd"
   "atdgen"

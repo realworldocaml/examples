@@ -16,14 +16,14 @@ List.find [1;2;3] ~f:(fun x -> x >= 2) ;;
 List.find [1;2;3] ~f:(fun x -> x >= 10) ;;
 [%%expect ocaml {|- : int option = None|}];;
 [@@@part "2"];;
-let compute_bounds ~cmp list =
-  let sorted = List.sort ~cmp list in
+let compute_bounds ~compare list =
+  let sorted = List.sort ~compare list in
   match List.hd sorted, List.last sorted with
   | None,_ | _, None -> None
   | Some x, Some y -> Some (x,y)
 ;;
 [%%expect ocaml {|
-val compute_bounds : cmp:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
+val compute_bounds : compare:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
   <fun>
 |}];;
 [@@@part "3"];;
@@ -79,47 +79,47 @@ let bind option f =
 ;;
 [%%expect ocaml {|val bind : 'a option -> ('a -> 'b option) -> 'b option = <fun>|}];;
 [@@@part "12"];;
-let compute_bounds ~cmp list =
-  let sorted = List.sort ~cmp list in
+let compute_bounds ~compare list =
+  let sorted = List.sort ~compare list in
   Option.bind (List.hd sorted) (fun first ->
     Option.bind (List.last sorted) (fun last ->
       Some (first,last)))
 ;;
 [%%expect ocaml {|
-val compute_bounds : cmp:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
+val compute_bounds : compare:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
   <fun>
 |}];;
 [@@@part "13"];;
-let compute_bounds ~cmp list =
+let compute_bounds ~compare list =
   let open Option.Monad_infix in
-  let sorted = List.sort ~cmp list in
+  let sorted = List.sort ~compare list in
   List.hd sorted   >>= fun first ->
   List.last sorted >>= fun last  ->
   Some (first,last)
 ;;
 [%%expect ocaml {|
-val compute_bounds : cmp:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
+val compute_bounds : compare:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
   <fun>
 |}];;
 [@@@part "13.1"];;
-let compute_bounds ~cmp list =
+let compute_bounds ~compare list =
   let open Option.Let_syntax in
-  let sorted = List.sort ~cmp list in
+  let sorted = List.sort ~compare list in
   let%bind first = List.hd sorted in
   let%bind last  = List.last sorted in
   Some (first,last)
 ;;
 [%%expect ocaml {|
-val compute_bounds : cmp:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
+val compute_bounds : compare:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
   <fun>
 |}];;
 [@@@part "14"];;
-let compute_bounds ~cmp list =
-  let sorted = List.sort ~cmp list in
+let compute_bounds ~compare list =
+  let sorted = List.sort ~compare list in
   Option.both (List.hd sorted) (List.last sorted)
 ;;
 [%%expect ocaml {|
-val compute_bounds : cmp:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
+val compute_bounds : compare:('a -> 'a -> int) -> 'a list -> ('a * 'a) option =
   <fun>
 |}];;
 [@@@part "15"];;
