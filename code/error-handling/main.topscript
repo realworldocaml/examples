@@ -5,6 +5,7 @@
 #require "core";;
 #require "core.top";;
 #require "ppx_jane";;
+#warnings "-3";;
 #silent false;;
 [@@@part "0.5"];;
 open Core_kernel;;
@@ -250,14 +251,14 @@ let load filename =
 [@@@part "31"];;
 let lookup_weight ~compute_weight alist key =
   try
-    let data = List.Assoc.find_exn alist key in
+    let data = List.Assoc.find_exn ~equal:(=) alist key in
     compute_weight data
   with
     Not_found -> 0. ;;
 [%%expect ocaml {|
 val lookup_weight :
-  compute_weight:((equal:('a -> 'a -> bool) -> 'b) -> float) ->
-  ('a, 'b) Base__List.Assoc.t -> 'a -> float = <fun>
+  compute_weight:('a -> float) -> ('b, 'a) Base__List.Assoc.t -> 'b -> float =
+  <fun>
 |}];;
 [@@@part "32"];;
 lookup_weight ~compute_weight:(fun _ -> raise Not_found)
@@ -266,36 +267,35 @@ lookup_weight ~compute_weight:(fun _ -> raise Not_found)
 [@@@part "33"];;
 let lookup_weight ~compute_weight alist key =
   match
-    try Some (List.Assoc.find_exn alist key)
+    try Some (List.Assoc.find_exn ~equal:(=) alist key)
     with _ -> None
   with
   | None -> 0.
   | Some data -> compute_weight data ;;
 [%%expect ocaml {|
 val lookup_weight :
-  compute_weight:((equal:('a -> 'a -> bool) -> 'b) -> float) ->
-  ('a, 'b) Base__List.Assoc.t -> 'a -> float = <fun>
+  compute_weight:('a -> float) -> ('b, 'a) Base__List.Assoc.t -> 'b -> float =
+  <fun>
 |}];;
 [@@@part "33.1"];;
 let lookup_weight ~compute_weight alist key =
-  match List.Assoc.find_exn alist key with
+  match List.Assoc.find_exn ~equal:(=) alist key with
   | exception _ -> 0.
   | data -> compute_weight data ;;
 [%%expect ocaml {|
 val lookup_weight :
-  compute_weight:((equal:('a -> 'a -> bool) -> 'b) -> float) ->
-  ('a, 'b) Base__List.Assoc.t -> 'a -> float = <fun>
+  compute_weight:('a -> float) -> ('b, 'a) Base__List.Assoc.t -> 'b -> float =
+  <fun>
 |}];;
 [@@@part "34"];;
 let lookup_weight ~compute_weight alist key =
-  match List.Assoc.find alist key with
+  match List.Assoc.find ~equal:(=) alist key with
   | None -> 0.
   | Some data -> compute_weight data ;;
-[%%expect{|
-Characters 89-93:
-Error: This pattern matches values of type 'a option
-       but a pattern was expected which matches values of type
-         equal:('b -> 'b -> bool) -> 'c option
+[%%expect ocaml {|
+val lookup_weight :
+  compute_weight:('a -> float) -> ('b, 'a) Base__List.Assoc.t -> 'b -> float =
+  <fun>
 |}];;
 [@@@part "35"];;
 let find alist key =
