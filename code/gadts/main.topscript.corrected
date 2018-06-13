@@ -1,0 +1,349 @@
+#use "topfind";;
+[%%expect ocaml {|- : unit = ()|};
+{|
+Findlib has been successfully loaded. Additional directives:
+  #require "package";;      to load a package
+  #list;;                   to list the available packages
+  #camlp4o;;                to load camlp4 (standard syntax)
+  #camlp4r;;                to load camlp4 (revised syntax)
+  #predicates "p,q,...";;   to set these predicates
+  Topfind.reset();;         to force that packages will be reloaded
+  #thread;;                 to enable threads
+
+|};
+ocaml {|- : unit = ()|}];;
+#thread;;
+[%%expect{|
+/home/travis/.opam/4.04.2/lib/ocaml/threads: added to search path
+/home/travis/.opam/4.04.2/lib/ocaml/threads/threads.cma: loaded
+|}];;
+#camlp4o;;
+[%%expect{|
+/home/travis/.opam/4.04.2/lib/ocaml/dynlink.cma: loaded
+/home/travis/.opam/4.04.2/lib/ocaml/camlp4: added to search path
+/home/travis/.opam/4.04.2/lib/ocaml/camlp4/camlp4o.cma: loaded
+Cannot find file /home/travis/.opam/4.04.2/lib/ocaml/camlp4/camlp4o.cma.
+|}];;
+#require "core";;
+[%%expect{|
+/home/travis/.opam/4.04.2/lib/base/caml: added to search path
+/home/travis/.opam/4.04.2/lib/base/caml/caml.cma: loaded
+/home/travis/.opam/4.04.2/lib/base/shadow_stdlib: added to search path
+/home/travis/.opam/4.04.2/lib/base/shadow_stdlib/shadow_stdlib.cma: loaded
+/home/travis/.opam/4.04.2/lib/sexplib/0: added to search path
+/home/travis/.opam/4.04.2/lib/base: added to search path
+/home/travis/.opam/4.04.2/lib/base/base.cma: loaded
+/home/travis/.opam/4.04.2/lib/fieldslib: added to search path
+/home/travis/.opam/4.04.2/lib/fieldslib/fieldslib.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_compare/runtime-lib: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_compare/runtime-lib/ppx_compare_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/sexplib: added to search path
+/home/travis/.opam/4.04.2/lib/variantslib: added to search path
+/home/travis/.opam/4.04.2/lib/variantslib/variantslib.cma: loaded
+/home/travis/.opam/4.04.2/lib/bin_prot/shape: added to search path
+/home/travis/.opam/4.04.2/lib/bin_prot/shape/bin_shape_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/bin_prot: added to search path
+/home/travis/.opam/4.04.2/lib/bin_prot/bin_prot.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_hash/runtime-lib: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_hash/runtime-lib/ppx_hash_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_inline_test/config: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_inline_test/config/inline_test_config.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_inline_test/runtime-lib: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_inline_test/runtime-lib/ppx_inline_test_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/core_kernel/base_for_tests: added to search path
+/home/travis/.opam/4.04.2/lib/core_kernel/base_for_tests/base_for_tests.cma: loaded
+/home/travis/.opam/4.04.2/lib/jane-street-headers: added to search path
+/home/travis/.opam/4.04.2/lib/jane-street-headers/jane_street_headers.cma: loaded
+/home/travis/.opam/4.04.2/lib/ocaml/nums.cma: loaded
+/home/travis/.opam/4.04.2/lib/num-top: added to search path
+/home/travis/.opam/4.04.2/lib/num-top/num_top.cma: loaded
+/home/travis/.opam/4.04.2/lib/num: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_assert/runtime-lib: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_assert/runtime-lib/ppx_assert_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_bench/runtime-lib: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_bench/runtime-lib/ppx_bench_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_expect/common: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_expect/common/expect_test_common.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_expect/config: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_expect/config/expect_test_config.cma: loaded
+/home/travis/.opam/4.04.2/lib/ppx_expect/collector: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_expect/collector/expect_test_collector.cma: loaded
+/home/travis/.opam/4.04.2/lib/stdio: added to search path
+/home/travis/.opam/4.04.2/lib/stdio/stdio.cma: loaded
+/home/travis/.opam/4.04.2/lib/typerep: added to search path
+/home/travis/.opam/4.04.2/lib/typerep/typerep_lib.cma: loaded
+/home/travis/.opam/4.04.2/lib/core_kernel: added to search path
+/home/travis/.opam/4.04.2/lib/core_kernel/core_kernel.cma: loaded
+/home/travis/.opam/4.04.2/lib/sexplib/unix: added to search path
+/home/travis/.opam/4.04.2/lib/sexplib/unix/sexplib_unix.cma: loaded
+/home/travis/.opam/4.04.2/lib/spawn: added to search path
+/home/travis/.opam/4.04.2/lib/spawn/spawn.cma: loaded
+/home/travis/.opam/4.04.2/lib/core: added to search path
+/home/travis/.opam/4.04.2/lib/core/core.cma: loaded
+|}];;
+#require "ppx_jane";;
+[%%expect{|
+/home/travis/.opam/4.04.2/lib/ppx_jane: added to search path
+/home/travis/.opam/4.04.2/lib/ppx_jane/./ppx.exe --as-ppx: activated
+|}];;
+open Core_kernel;;
+[@@@part "1"];;
+type 'a compact_array = 
+  | Array of 'a array
+  | Bytes of bytes
+;;
+
+[%%expect ocaml {|type 'a compact_array = Array of 'a array | Bytes of Core_kernel.bytes|}];;
+[@@@part "1.1"];;
+let of_bytes x = Bytes x
+let of_array x = Array x
+
+let length = function
+  | Array a -> Array.length a
+  | Bytes s -> Bytes.length s
+
+let get t i =
+  match t with
+  | Array a -> a.(i)
+  | Bytes s -> s.[i]
+
+let set t i v =
+  match t with
+  | Array a -> a.(i) <- v
+  | Bytes s -> s.[i] <- v
+
+[%%expect];;
+[%%expect{|
+Characters 294-300:
+Error: Extension `expect' was not translated.
+Hint: `expect' is available for expressions but is used here in the context
+of a structure item.
+Did you put it at the wrong level?
+|}];;
+[@@@part "2"];;
+type 'a gadt_compact_array =
+  | Array : 'a array -> 'a t
+  | Bytes : bytes -> 'a t
+;;
+
+[%%expect{|
+Characters 54-58:
+Error: Unbound type constructor t
+|}];;
+[@@@part "2.1"];;
+Array [|1;2;3|];;
+[%%expect ocaml {|- : int compact_array = Array [|1; 2; 3|]|}];;
+Array [|1.0;2.0;3.0|];;
+[%%expect ocaml {|- : float compact_array = Array [|1.; 2.; 3.|]|}];;
+
+# part 2.2
+
+  Bytes "foo";;
+
+[%%expect{|
+Characters 8-11:
+Error: Syntax error
+|}];;
+[@@@part "3"];;
+type 'a t = | Array : 'a array -> 'a t
+            | Bytes : bytes -> char t
+;;
+
+[%%expect ocaml {|type 'a t = Array : 'a array -> 'a t | Bytes : Core_kernel.bytes -> char t|}];;
+[@@@part "3.1"];;
+let length t = 
+  match t with
+  | Bytes b -> Bytes.length b
+  | Array a -> Array.length a
+;;
+
+[%%expect{|
+Characters 60-61:
+Error: This expression has type Core_kernel.bytes
+       but an expression was expected of type string
+|}];;
+[@@@part "3.2"];;
+let length (type el) (t:el t) = 
+  match t with
+  | Bytes b -> Bytes.length b
+  | Array a -> Array.length a
+;;
+
+[%%expect{|
+Characters 77-78:
+Error: This expression has type Core_kernel.bytes
+       but an expression was expected of type string
+|}];;
+[@@@part "3.3"];;
+module Compact_array = struct
+
+  type 'a t = | Array : 'a array -> 'a t
+              | Bytes : bytes -> char t
+
+  let of_bytes x = Bytes x
+  let of_array x = Array x
+
+  let length (type el) (t:el t) =
+    match t with
+    | Array a -> Array.length a
+    | Bytes s -> Bytes.length s
+
+  let get (type el) (t:el t) i : el =
+    match t with
+    | Array a -> Array.get a i
+    | Bytes s -> Bytes.get s i
+
+  let set (type el) (t:el t) i (v:el) =
+    match t with
+    | Array a -> Array.set a i v
+    | Bytes s -> Bytes.set s i v
+
+end;;
+
+[%%expect{|
+Characters 282-283:
+Error: This expression has type Core_kernel.bytes
+       but an expression was expected of type string
+|}];;
+[@@@part "10"];;
+type value =
+  | Int of int
+  | Bool of bool
+
+type expr = 
+  | Value of value
+  | If    of expr * expr * expr
+  | Gt    of expr * expr
+  | Plus  of expr * expr
+;;
+
+[%%expect ocaml {|
+type value = Int of int | Bool of bool
+type expr =
+    Value of value
+  | If of expr * expr * expr
+  | Gt of expr * expr
+  | Plus of expr * expr
+|}];;
+[@@@part "11"];;
+let max_expr x y =
+  let i x = Value (Int x) in
+  let x = i x in
+  let y = i y in
+  If (Gt (x,y), x, y)
+;;
+[%%expect ocaml {|val max_expr : int -> int -> expr = <fun>|}];;
+max_expr 3 4;;
+
+[%%expect ocaml {|
+- : expr =
+If (Gt (Value (Int 3), Value (Int 4)), Value (Int 3), Value (Int 4))
+|}];;
+[@@@part "12"];;
+let ill_typed x y =
+  let i x = Value (Int x) in
+  let x = i x in
+  let y = i y in
+  Plus (Gt (x,y), y)
+;;
+[%%expect ocaml {|val ill_typed : int -> int -> expr = <fun>|}];;
+ill_typed 3 4;;
+
+[%%expect ocaml {|- : expr = Plus (Gt (Value (Int 3), Value (Int 4)), Value (Int 4))|}];;
+[@@@part "13"];;
+let rec eval expr =
+  let eval_int expr =
+    match eval expr with
+    | Int x -> x
+    | Bool _ -> failwith "expected int, found bool"
+  in
+  let eval_bool expr =
+    match eval expr with
+    | Bool x -> x
+    | Int _ -> failwith "expected bool, found int"
+  in
+  match expr with
+  | Value v    -> v
+  | If (c,t,e) -> if eval_bool c then eval t else eval e
+  | Gt (x,y)   -> Bool (eval_int x > eval_int y)
+  | Plus (x,y) -> Int (eval_int x + eval_int y)
+;;
+
+[%%expect ocaml {|val eval : expr -> value = <fun>|}];;
+[@@@part "14"];;
+eval (max_expr  3 4);;
+[%%expect ocaml {|- : value = Int 4|}];;
+eval (ill_typed 3 4);;
+
+[%%expect{|Exception: Failure "expected int, found bool".|}];;
+[@@@part "15"];;
+type _ value =
+  | Int  : int  -> int value
+  | Bool : bool -> bool value
+;;
+[%%expect ocaml {|type _ value = Int : int -> int value | Bool : bool -> bool value|}];;
+type _ expr =
+  | Value : 'a value                      -> 'a expr
+  | If    : bool expr * 'a expr * 'a expr -> 'a expr
+  | Gt    : 'a expr * 'a expr             -> bool expr
+  | Plus  : int expr * int expr           -> int expr
+;;
+[%%expect ocaml {|
+type _ expr =
+    Value : 'a value -> 'a expr
+  | If : bool expr * 'a expr * 'a expr -> 'a expr
+  | Gt : 'a expr * 'a expr -> bool expr
+  | Plus : int expr * int expr -> int expr
+|}];;
+[@@@part "16"];;
+let max_expr x y =
+  let i x = Value (Int x) in
+  let x = i x in
+  let y = i y in
+  If (Gt (x,y), x, y)
+;;
+[%%expect ocaml {|val max_expr : int -> int -> int expr = <fun>|}];;
+max_expr 3 4;;
+
+[%%expect ocaml {|
+- : int expr =
+If (Gt (Value (Int 3), Value (Int 4)), Value (Int 3), Value (Int 4))
+|}];;
+[@@@part "17"];;
+let ill_typed x y =
+  let i x = Value (Int x) in
+  let x = i x in
+  let y = i y in
+  Plus (Gt (x,y), y)
+;;
+
+[%%expect{|
+Characters 92-100:
+Error: This expression has type bool expr
+       but an expression was expected of type int expr
+       Type bool is not compatible with type int 
+|}];;
+[@@@part "18"];;
+let rec eval = function
+  | Value (Int x)  -> x
+  | Value (Bool x) -> x
+  | If    (c,t,e)  -> if eval c then eval t else eval e
+  | Gt    (x,y)    -> eval x > eval y
+  | Plus  (x,y)    -> eval x + eval y
+;;
+
+[%%expect{|
+Characters 59-67:
+Error: This pattern matches values of type bool value
+       but a pattern was expected which matches values of type int value
+       Type bool is not compatible with type int 
+|}];;
+[@@@part "19"];;
+let rec eval : type a . a expr -> a = function
+  | Value (Int x)  -> x
+  | Value (Bool x) -> x
+  | If    (c,t,e)  -> if eval c then eval t else eval e
+  | Gt    (x,y)    -> eval x > eval y
+  | Plus  (x,y)    -> eval x + eval y
+;;
+[%%expect ocaml {|val eval : 'a expr -> 'a = <fun>|}];;

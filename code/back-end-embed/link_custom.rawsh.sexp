@@ -1,0 +1,3 @@
+(Other  "$ ocamlc -a -o mylib.cma -custom a.cmo b.cmo -cclib -lmylib\
+       \n\
+       \n")
