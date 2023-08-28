@@ -147,7 +147,7 @@ let log_entry maybe_time message =
       | Some x -> x
       | None -> Time.now ()
     in
-    Time.to_sec_string time Time.Zone.local ^ " -- " ^ message
+    Time.to_sec_string time ~zone:Time.Zone.utc ^ " -- " ^ message
   ;;
 log_entry (Some Time.epoch) "A long long time ago";;
 log_entry None "Up to the minute";;
